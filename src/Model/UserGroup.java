@@ -45,6 +45,8 @@ public class UserGroup {
             String sql = "UPDATE userGroups SET name=? where id = ?";
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, this.name);
+            preparedStatement.setInt(2, this.id);
+
             preparedStatement.executeUpdate();
         }
     }

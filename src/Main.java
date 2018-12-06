@@ -6,12 +6,19 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("test");
         User user = new User();
+        int id = 10;
         try {
-            user= User.loadUserById(DatabaseConnection.getEfficientConnection(),10);
+            user= User.loadUserById(DatabaseConnection.getEfficientConnection(),id);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        System.out.println(user.toString());
+        if (user instanceof User){
+            System.out.println(user.toString());
+        }else{
+            System.out.println("User of id = "+id+" not exist.");
+        }
+
+
         try {
             user.delete(DatabaseConnection.getEfficientConnection());
         } catch (SQLException e) {

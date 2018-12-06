@@ -1,39 +1,30 @@
 import Model.User;
+import Model.UserGroup;
 
 import java.sql.SQLException;
 
+
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         System.out.println("test");
-        User user = new User();
-        int id = 10;
-        try {
-            user= User.loadUserById(DatabaseConnection.getEfficientConnection(),id);
-        } catch (SQLException e) {
-            e.printStackTrace();
+        UserGroup userGroup = new UserGroup("group3");
+        userGroup.saveToDB(DatabaseConnection.getEfficientConnection());
+        System.out.println(userGroup.toString());
+        UserGroup[] userGroups = new UserGroup[0];
+        userGroups= UserGroup.loadAllUserGroups(DatabaseConnection.getEfficientConnection());
+        for (UserGroup userGroup1: userGroups) {
+            System.out.println(userGroup1);
         }
-        if (user instanceof User){
-            System.out.println(user.toString());
-        }else{
-            System.out.println("User of id = "+id+" not exist.");
+        userGroup.delete(DatabaseConnection.getEfficientConnection());
+        userGroups= UserGroup.loadAllUserGroups(DatabaseConnection.getEfficientConnection());
+        for (UserGroup userGroup1: userGroups) {
+            System.out.println(userGroup1);
         }
-
-
-        try {
-            user.delete(DatabaseConnection.getEfficientConnection());
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        User[] users=new User[0];
-        try {
-            users=User.loadAllUsers(DatabaseConnection.getEfficientConnection());
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        for (User user1:users){
-
-            System.out.println(user1.toString());
+        userGroup = UserGroup.loadUserGroupById(DatabaseConnection.getEfficientConnection(),3);
+        userGroup.delete(DatabaseConnection.getEfficientConnection());
+        userGroups= UserGroup.loadAllUserGroups(DatabaseConnection.getEfficientConnection());
+        for (UserGroup userGroup1: userGroups) {
+            System.out.println(userGroup1);
         }
 
     }

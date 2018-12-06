@@ -31,11 +31,10 @@ public class UserGroup {
 
     public void saveToDB(Connection conn) throws SQLException {
         if (this.id == 0) {
-            String sql = "INSERT INTO userGroups(id, name) VALUES (?, ?)";
+            String sql = "INSERT INTO userGroups(name) VALUES (?)";
             String[] generatedColumns = { "ID" };
             PreparedStatement preparedStatement = conn.prepareStatement(sql, generatedColumns);
-            preparedStatement.setInt(1, this.id);
-            preparedStatement.setString(2, this.name);
+            preparedStatement.setString(1, this.name);
             preparedStatement.executeUpdate();
             ResultSet rs = preparedStatement.getGeneratedKeys();
             if (rs.next()) {
@@ -88,4 +87,11 @@ public class UserGroup {
         }
     }
 
+    @Override
+    public String toString() {
+        return "UserGroup{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

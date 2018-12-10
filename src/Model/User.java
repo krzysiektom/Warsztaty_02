@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class User {
-    private int id;
+    private long id;
     private String username;
     private String email;
     private String password;
@@ -21,6 +21,38 @@ public class User {
     }
 
     public User() {
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public int getUserGroup_id() {
+        return userGroup_id;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setUserGroup_id(int userGroup_id) {
+        this.userGroup_id = userGroup_id;
     }
 
     public void setPassword(String password) {
@@ -50,28 +82,28 @@ public class User {
             preparedStatement.executeUpdate();
             ResultSet rs = preparedStatement.getGeneratedKeys();
             if (rs.next()) {
-                this.id = rs.getInt(1);
+                this.id = rs.getLong(1);
             }
         } else {
-            String sql = "UPDATE users SET username=?, email=?, password=? usergroup_id=? where id = ?";
+            String sql = "UPDATE users SET username=?, email=?, password=?, usergroup_id=? where id=?";
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, this.username);
             preparedStatement.setString(2, this.email);
             preparedStatement.setString(3, this.password);
             preparedStatement.setInt(4, this.userGroup_id);
-            preparedStatement.setInt(5, this.id);
+            preparedStatement.setLong(5, this.id);
             preparedStatement.executeUpdate();
         }
     }
 
-    static public User loadUserById(Connection conn, int id) throws SQLException {
+    static public User loadUserById(Connection conn, long id) throws SQLException {
         String sql = "SELECT * FROM users where id=?";
         PreparedStatement preparedStatement = conn.prepareStatement(sql);
-        preparedStatement.setInt(1, id);
+        preparedStatement.setLong(1, id);
         ResultSet resultSet = preparedStatement.executeQuery();
         if (resultSet.next()) {
             User loadedUser = new User();
-            loadedUser.id = resultSet.getInt("id");
+            loadedUser.id = resultSet.getLong("id");
             loadedUser.username = resultSet.getString("username");
             loadedUser.password = resultSet.getString("password");
             loadedUser.email = resultSet.getString("email");
@@ -87,7 +119,7 @@ public class User {
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
             User loadedUser = new User();
-            loadedUser.id = resultSet.getInt("id");
+            loadedUser.id = resultSet.getLong("id");
             loadedUser.username = resultSet.getString("username");
             loadedUser.password = resultSet.getString("password");
             loadedUser.email = resultSet.getString("email");
@@ -101,7 +133,7 @@ public class User {
         if (this.id != 0) {
             String sql = "DELETE FROM users WHERE id=?";
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setInt(1, this.id);
+            preparedStatement.setLong(1, this.id);
             preparedStatement.executeUpdate();
             this.id = 0;
         }
@@ -114,7 +146,7 @@ public class User {
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
             User loadedUser = new User();
-            loadedUser.id = resultSet.getInt("id");
+            loadedUser.id = resultSet.getLong("id");
             loadedUser.username = resultSet.getString("username");
             loadedUser.password = resultSet.getString("password");
             loadedUser.email = resultSet.getString("email");

@@ -41,7 +41,6 @@ public class Main3 {
                     break;
                 }
                 case "quit":{
-                    System.out.println("quit");
                     exit=true;
                     break;
                 }

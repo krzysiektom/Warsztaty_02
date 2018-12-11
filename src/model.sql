@@ -25,7 +25,7 @@ CREATE TABLE solution(
                        updated DATETIME,
                        description TEXT,
                        exercise_id INT NOT NULL ,
-                       users_id BIGINT NOT NULL ,
+                       user_id BIGINT NOT NULL ,
                        FOREIGN KEY (exercise_id) REFERENCES exercise(id),
                        FOREIGN KEY (users_id) REFERENCES users(id)
 );

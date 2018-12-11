@@ -5,13 +5,13 @@ import java.util.ArrayList;
 
 public class Solution {
     private int id;
-    private Time created;
-    private Time updated;
+    private Timestamp created;
+    private Timestamp updated;
     private String description;
     private int exercise_id;
     private int user_id;
 
-    public Solution(Time created, Time updated, String description, int exercise_id, int user_id) {
+    public Solution(Timestamp created, Timestamp updated, String description, int exercise_id, int user_id) {
         this.created = created;
         this.updated = updated;
         this.description = description;
@@ -26,11 +26,11 @@ public class Solution {
         return id;
     }
 
-    public Time getCreated() {
+    public Timestamp getCreated() {
         return created;
     }
 
-    public Time getupdated() {
+    public Timestamp getupdated() {
         return updated;
     }
 
@@ -46,11 +46,11 @@ public class Solution {
         return user_id;
     }
 
-    public void setCreated(Time created) {
+    public void setCreated(Timestamp created) {
         this.created = created;
     }
 
-    public void setupdated(Time updated) {
+    public void setupdated(Timestamp updated) {
         this.updated = updated;
     }
 
@@ -71,11 +71,11 @@ public class Solution {
             String sql = "INSERT INTO solution(created, updated, description, exercise_id, user_id) VALUES (?, ?, ?, ?, ?)";
             String[] generatedColumns = { "ID" };
             PreparedStatement preparedStatement = conn.prepareStatement(sql, generatedColumns);
-            preparedStatement.setTime(1, this.created);
-            preparedStatement.setTime(2, this.updated);
+            preparedStatement.setTimestamp(1, this.created);
+            preparedStatement.setTimestamp(2, this.updated);
             preparedStatement.setString(3, this.description);
             preparedStatement.setInt(4, this.exercise_id);
-            preparedStatement.setInt(5, this.user_id);            
+            preparedStatement.setInt(5, this.user_id);
             preparedStatement.executeUpdate();
             ResultSet rs = preparedStatement.getGeneratedKeys();
             if (rs.next()) {
@@ -84,8 +84,8 @@ public class Solution {
         } else {
             String sql = "update solution SET created=?, updated=?, description=? exercise_id=?, user_id=? where id = ?";
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setTime(1, this.created);
-            preparedStatement.setTime(2, this.updated);
+            preparedStatement.setTimestamp(1, this.created);
+            preparedStatement.setTimestamp(2, this.updated);
             preparedStatement.setString(3, this.description);
             preparedStatement.setInt(4, this.exercise_id);
             preparedStatement.setInt(5, this.user_id);
@@ -102,8 +102,8 @@ public class Solution {
         if (resultSet.next()) {
             Solution loadedSolution = new Solution();
             loadedSolution.id = resultSet.getInt("id");
-            loadedSolution.created = resultSet.getTime("created");
-            loadedSolution.updated = resultSet.getTime("updated");
+            loadedSolution.created = resultSet.getTimestamp("created");
+            loadedSolution.updated = resultSet.getTimestamp("updated");
             loadedSolution.description = resultSet.getString("description");
             loadedSolution.exercise_id=resultSet.getInt("exercise_id");
             loadedSolution.user_id=resultSet.getInt("users_id");
@@ -119,8 +119,8 @@ public class Solution {
         while (resultSet.next()) {
             Solution loadedSolution = new Solution();
             loadedSolution.id = resultSet.getInt("id");
-            loadedSolution.created = resultSet.getTime("created");
-            loadedSolution.updated = resultSet.getTime("updated");
+            loadedSolution.created = resultSet.getTimestamp("created");
+            loadedSolution.updated = resultSet.getTimestamp("updated");
             loadedSolution.description = resultSet.getString("description");
             loadedSolution.exercise_id=resultSet.getInt("exercise_id");
             loadedSolution.user_id=resultSet.getInt("users_id");
@@ -148,8 +148,8 @@ public class Solution {
         while (resultSet.next()) {
             Solution loadedSolution = new Solution();
             loadedSolution.id = resultSet.getInt("id");
-            loadedSolution.created = resultSet.getTime("created");
-            loadedSolution.updated = resultSet.getTime("updated");
+            loadedSolution.created = resultSet.getTimestamp("created");
+            loadedSolution.updated = resultSet.getTimestamp("updated");
             loadedSolution.description = resultSet.getString("description");
             loadedSolution.exercise_id=resultSet.getInt("exercise_id");
             loadedSolution.user_id=resultSet.getInt("users_id");
@@ -167,8 +167,8 @@ public class Solution {
         while (resultSet.next()) {
             Solution loadedSolution = new Solution();
             loadedSolution.id = resultSet.getInt("id");
-            loadedSolution.created = resultSet.getTime("created");
-            loadedSolution.updated = resultSet.getTime("updated");
+            loadedSolution.created = resultSet.getTimestamp("created");
+            loadedSolution.updated = resultSet.getTimestamp("updated");
             loadedSolution.description = resultSet.getString("description");
             loadedSolution.exercise_id=resultSet.getInt("exercise_id");
             loadedSolution.user_id=resultSet.getInt("users_id");

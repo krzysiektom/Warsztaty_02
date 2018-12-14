@@ -75,6 +75,22 @@ public class Exercise {
         return null;
     }
 
+    static public Exercise[] loadExerciseNotSolvedByUserId(Connection conn, int user_id) throws SQLException {
+        ArrayList<Exercise> exercise = new ArrayList<Exercise>();
+        String sql = "SELECT * from exercise where id not in ((select exercise_id from solution where user_id=?))";
+        PreparedStatement preparedStatement = conn.prepareStatement(sql);
+        preparedStatement.setInt(1, user_id);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            Exercise loadedExercise = new Exercise();
+            loadedExercise.id = resultSet.getInt("id");
+            loadedExercise.title = resultSet.getString("title");
+            loadedExercise.description = resultSet.getString("description");
+            exercise.add(loadedExercise);}
+        Exercise[] uArray = new Exercise[exercise.size()]; uArray = exercise.toArray(uArray);
+        return uArray;
+    }
+
     static public Exercise[] loadAllExercise(Connection conn) throws SQLException {
         ArrayList<Exercise> exercise = new ArrayList<Exercise>();
         String sql = "SELECT * FROM exercise";

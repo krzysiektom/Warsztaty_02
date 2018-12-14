@@ -27,5 +27,5 @@ CREATE TABLE solution(
                        exercise_id INT NOT NULL ,
                        user_id BIGINT NOT NULL ,
                        FOREIGN KEY (exercise_id) REFERENCES exercise(id),
-                       FOREIGN KEY (users_id) REFERENCES users(id)
+                       FOREIGN KEY (user_id) REFERENCES users(id)
 );

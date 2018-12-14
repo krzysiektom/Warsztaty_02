@@ -106,7 +106,7 @@ public class Solution {
             loadedSolution.updated = resultSet.getTimestamp("updated");
             loadedSolution.description = resultSet.getString("description");
             loadedSolution.exercise_id=resultSet.getInt("exercise_id");
-            loadedSolution.user_id=resultSet.getInt("users_id");
+            loadedSolution.user_id=resultSet.getInt("user_id");
             return loadedSolution;}
         return null;
     }
@@ -123,7 +123,7 @@ public class Solution {
             loadedSolution.updated = resultSet.getTimestamp("updated");
             loadedSolution.description = resultSet.getString("description");
             loadedSolution.exercise_id=resultSet.getInt("exercise_id");
-            loadedSolution.user_id=resultSet.getInt("users_id");
+            loadedSolution.user_id=resultSet.getInt("user_id");
             solution.add(loadedSolution);}
         Solution[] uArray = new Solution[solution.size()]; uArray = solution.toArray(uArray);
         return uArray;
@@ -141,7 +141,7 @@ public class Solution {
 
     static public Solution[] loadAllByUserId(Connection conn, int id) throws SQLException {
         ArrayList<Solution> solution = new ArrayList<Solution>();
-        String sql = "SELECT * FROM solution WHERE users_id=?";
+        String sql = "SELECT * FROM solution WHERE user_id=?";
         PreparedStatement preparedStatement = conn.prepareStatement(sql);
         preparedStatement.setInt(1, id);
         ResultSet resultSet = preparedStatement.executeQuery();
@@ -152,7 +152,7 @@ public class Solution {
             loadedSolution.updated = resultSet.getTimestamp("updated");
             loadedSolution.description = resultSet.getString("description");
             loadedSolution.exercise_id=resultSet.getInt("exercise_id");
-            loadedSolution.user_id=resultSet.getInt("users_id");
+            loadedSolution.user_id=resultSet.getInt("user_id");
             solution.add(loadedSolution);}
         Solution[] uArray = new Solution[solution.size()]; uArray = solution.toArray(uArray);
         return uArray;
@@ -160,7 +160,7 @@ public class Solution {
 
     static public Solution[] loadAllByExerciseId(Connection conn, int id) throws SQLException {
         ArrayList<Solution> solution = new ArrayList<Solution>();
-        String sql = "SELECT * FROM solution WHERE exercise_id=?";
+        String sql = "SELECT * FROM solution WHERE exercise_id=? order by created";
         PreparedStatement preparedStatement = conn.prepareStatement(sql);
         preparedStatement.setInt(1, id);
         ResultSet resultSet = preparedStatement.executeQuery();
@@ -177,4 +177,15 @@ public class Solution {
         return uArray;
     }
 
+    @Override
+    public String toString() {
+        return "Solution{" +
+                "id=" + id +
+                ", created=" + created +
+                ", updated=" + updated +
+                ", description='" + description + '\'' +
+                ", exercise_id=" + exercise_id +
+                ", user_id=" + user_id +
+                '}';
+    }
 }

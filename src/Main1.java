@@ -8,7 +8,8 @@ public class Main1 {
         boolean exit=false;
         Scanner scan = new Scanner(System.in);
         String text;
-        menu();
+        viewAllUsers();
+        viewMenu();
 
         while (!exit){
             text=scan.nextLine();
@@ -24,7 +25,8 @@ public class Main1 {
                     System.out.println("Wprowadz grupę nowego użytkownika");
                     user.setUserGroup_id(Integer.valueOf(scan.nextLine()));
                     user.saveToDB(DatabaseConnection.getEfficientConnection());
-                    menu();
+                    viewAllUsers();
+                    viewMenu();
                     break;
                 }
                 case "edit":{
@@ -40,7 +42,8 @@ public class Main1 {
                     System.out.println("Wprowadz grupę edytowanego użytkownika");
                     user.setUserGroup_id(Integer.valueOf(scan.nextLine()));
                     user.saveToDB(DatabaseConnection.getEfficientConnection());
-                    menu();
+                    viewAllUsers();
+                    viewMenu();
                     break;
                 }
                 case "delete":{
@@ -48,7 +51,8 @@ public class Main1 {
                     System.out.println("Wprowadz id usuwanego użytkownika");
                     user=User.loadUserById(DatabaseConnection.getEfficientConnection(),Long.valueOf(scan.nextLine()));
                     user.delete(DatabaseConnection.getEfficientConnection());
-                    menu();
+                    viewAllUsers();
+                    viewMenu();
                     break;
                 }
                 case "quit":{
@@ -58,14 +62,17 @@ public class Main1 {
                 default:{
                     System.out.println("Wybierz prawidłową opcję");
                 }
-
             }
-
-
         }
     }
 
-    public static void menu(){
+    public static void viewAllUsers() throws SQLException {
+        User[] users=User.loadAllUsers(DatabaseConnection.getEfficientConnection());
+        for (User user : users) {
+            System.out.println(user);
+        }
+    }
+    public static void viewMenu(){
         System.out.println("Wybierz jedną z opcji:\n" +
                 "add – dodanie użytkownika,\n" +
                 "edit – edycja użytkownika,\n" +

@@ -1,4 +1,3 @@
-import Model.Exercise;
 import Model.UserGroup;
 
 import java.sql.SQLException;
@@ -9,7 +8,8 @@ public class Main3 {
         boolean exit=false;
         Scanner scan = new Scanner(System.in);
         String text;
-        menu();
+        vieWAllUserGroups();
+        viewMenu();
 
         while (!exit){
             text=scan.nextLine();
@@ -19,7 +19,8 @@ public class Main3 {
                     System.out.println("Wprowadz nazwę nowej grupy");
                     userGroup.setName(scan.nextLine());
                     userGroup.saveToDB(DatabaseConnection.getEfficientConnection());
-                    menu();
+                    vieWAllUserGroups();
+                    viewMenu();
                     break;
                 }
                 case "edit":{
@@ -29,7 +30,8 @@ public class Main3 {
                     System.out.println("Wprowadz nazwę edytowanej grupy");
                     userGroup.setName(scan.nextLine());
                     userGroup.saveToDB(DatabaseConnection.getEfficientConnection());
-                    menu();
+                    vieWAllUserGroups();
+                    viewMenu();
                     break;
                 }
                 case "delete":{
@@ -37,7 +39,8 @@ public class Main3 {
                     System.out.println("Wprowadz id usuwanej grupy");
                     userGroup= UserGroup.loadUserGroupById(DatabaseConnection.getEfficientConnection(),Integer.valueOf(scan.nextLine()));
                     userGroup.delete(DatabaseConnection.getEfficientConnection());
-                    menu();
+                    vieWAllUserGroups();
+                    viewMenu();
                     break;
                 }
                 case "quit":{
@@ -50,8 +53,14 @@ public class Main3 {
             }
         }
     }
+    public static void vieWAllUserGroups() throws SQLException{
+        UserGroup[] userGroups=UserGroup.loadAllUserGroups(DatabaseConnection.getEfficientConnection());
+        for (UserGroup userGroup:userGroups) {
+            System.out.println(userGroup);
+        }
+    }
 
-    public static void menu(){
+    public static void viewMenu(){
         System.out.println("Wybierz jedną z opcji:\n" +
                 "add – dodanie grupy,\n" +
                 "edit – edycja grupy,\n" +

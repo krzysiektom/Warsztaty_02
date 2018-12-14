@@ -9,7 +9,8 @@ public class Main2 {
         boolean exit=false;
         Scanner scan = new Scanner(System.in);
         String text;
-        menu();
+        viewAllExercises();
+        viewMenu();
 
         while (!exit){
             text=scan.nextLine();
@@ -21,7 +22,8 @@ public class Main2 {
                     System.out.println("Wprowadz opis nowego zadania");
                     exercise.setDescription(scan.nextLine());
                     exercise.saveToDB(DatabaseConnection.getEfficientConnection());
-                    menu();
+                    viewAllExercises();
+                    viewMenu();
                     break;
                 }
                 case "edit":{
@@ -33,7 +35,8 @@ public class Main2 {
                     System.out.println("Wprowadz opis edytowanego zadania");
                     exercise.setDescription(scan.nextLine());
                     exercise.saveToDB(DatabaseConnection.getEfficientConnection());
-                    menu();
+                    viewAllExercises();
+                    viewMenu();
                     break;
                 }
                 case "delete":{
@@ -41,7 +44,8 @@ public class Main2 {
                     System.out.println("Wprowadz id usuwanego zadania");
                     exercise=Exercise.loadExerciseById(DatabaseConnection.getEfficientConnection(),Integer.valueOf(scan.nextLine()));
                     exercise.delete(DatabaseConnection.getEfficientConnection());
-                    menu();
+                    viewAllExercises();
+                    viewMenu();
                     break;
                 }
                 case "quit":{
@@ -55,7 +59,14 @@ public class Main2 {
         }
     }
 
-    public static void menu(){
+    public static void viewAllExercises() throws SQLException {
+        Exercise[] exercises=Exercise.loadAllExercise(DatabaseConnection.getEfficientConnection());
+        for (Exercise exercise:exercises) {
+            System.out.println(exercise);
+        }
+    }
+
+    public static void viewMenu(){
         System.out.println("Wybierz jedną z opcji:\n" +
                 "add – dodanie zadania,\n" +
                 "edit – edycja zadania,\n" +

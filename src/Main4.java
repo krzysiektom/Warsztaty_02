@@ -12,7 +12,8 @@ public class Main4 {
         boolean exit=false;
         Scanner scan = new Scanner(System.in);
         String text;
-        menu();
+        viewAllSolutions();
+        viewMenu();
 
         while (!exit){
             text=scan.nextLine();
@@ -33,7 +34,8 @@ public class Main4 {
                     solution.setExercise_id(Integer.valueOf(scan.nextLine()));
                     solution.setCreated(Timestamp.valueOf(LocalDateTime.now()));
                     solution.saveToDB(DatabaseConnection.getEfficientConnection());
-                    menu();
+                    viewAllSolutions();
+                    viewMenu();
                     break;
                 }
                 case "view":{
@@ -43,7 +45,8 @@ public class Main4 {
                     for (Solution solution: solutions) {
                         System.out.println(solution.toString());
                     }
-                    menu();
+                    viewAllSolutions();
+                    viewMenu();
                     break;
                 }
                 case "quit":{
@@ -57,7 +60,13 @@ public class Main4 {
         }
     }
 
-    public static void menu(){
+    public static void viewAllSolutions() throws SQLException {
+        Solution[] solutions=Solution.loadAllsolution(DatabaseConnection.getEfficientConnection());
+        for (Solution solution:solutions) {
+            System.out.println(solution.toString());
+        }
+    }
+    public static void viewMenu(){
         System.out.println("Wybierz jedną z opcji:\n" +
                 "add – przypisywanie zadań do użytkowników,\n" +
                 "view – przeglądanie rozwiązań danego użytkownika,\n" +

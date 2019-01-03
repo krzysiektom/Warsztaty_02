@@ -4,7 +4,7 @@ public class DatabaseConnection {
     private static Connection openConnetion = null;
     public static Connection getConnection(){
         try (Connection connection = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/model",
+                "jdbc:mysql://localhost:3306/model?characterEncoding=UTF-8",
                 "root",
                 "coderslab")) {
             return connection;
@@ -19,7 +19,7 @@ public class DatabaseConnection {
         if(openConnetion ==null || openConnetion.isClosed()){
 
             Connection connection = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/model",
+                    "jdbc:mysql://localhost:3306/model?characterEncoding=UTF-8",
                     "root",
                     "coderslab");
             openConnetion=connection;

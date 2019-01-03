@@ -5,16 +5,16 @@ import java.util.Scanner;
 
 public class Main1 {
     public static void main(String[] args) throws SQLException {
-        boolean exit=false;
+        boolean exit = false;
         Scanner scan = new Scanner(System.in);
         String text;
         viewAllUsers();
         viewMenu();
 
-        while (!exit){
-            text=scan.nextLine();
-            switch (text){
-                case "add":{
+        while (!exit) {
+            text = scan.nextLine();
+            switch (text) {
+                case "add": {
                     User user = new User();
                     System.out.println("Wprowadz imię i nazwisko nowego użytkownika");
                     user.setUsername(scan.nextLine());
@@ -29,10 +29,9 @@ public class Main1 {
                     viewMenu();
                     break;
                 }
-                case "edit":{
-                    User user = new User();
+                case "edit": {
                     System.out.println("Wprowadz id edytowanego użytkownika");
-                    user=User.loadUserById(DatabaseConnection.getEfficientConnection(),Long.valueOf(scan.nextLine()));
+                    User user = User.loadUserById(DatabaseConnection.getEfficientConnection(), Long.valueOf(scan.nextLine()));
                     System.out.println("Wprowadz imię i nazwisko edytowanego użytkownika");
                     user.setUsername(scan.nextLine());
                     System.out.println("Wprowadz email edytowanego użytkownika");
@@ -46,33 +45,33 @@ public class Main1 {
                     viewMenu();
                     break;
                 }
-                case "delete":{
-                    User user = new User();
+                case "delete": {
                     System.out.println("Wprowadz id usuwanego użytkownika");
-                    user=User.loadUserById(DatabaseConnection.getEfficientConnection(),Long.valueOf(scan.nextLine()));
+                    User user = User.loadUserById(DatabaseConnection.getEfficientConnection(), Long.valueOf(scan.nextLine()));
                     user.delete(DatabaseConnection.getEfficientConnection());
                     viewAllUsers();
                     viewMenu();
                     break;
                 }
-                case "quit":{
-                    exit=true;
+                case "quit": {
+                    exit = true;
                     break;
                 }
-                default:{
+                default: {
                     System.out.println("Wybierz prawidłową opcję");
                 }
             }
         }
     }
 
-    public static void viewAllUsers() throws SQLException {
-        User[] users=User.loadAllUsers(DatabaseConnection.getEfficientConnection());
+    private static void viewAllUsers() throws SQLException {
+        User[] users = User.loadAllUsers(DatabaseConnection.getEfficientConnection());
         for (User user : users) {
             System.out.println(user);
         }
     }
-    public static void viewMenu(){
+
+    private static void viewMenu() {
         System.out.println("Wybierz jedną z opcji:\n" +
                 "add – dodanie użytkownika,\n" +
                 "edit – edycja użytkownika,\n" +

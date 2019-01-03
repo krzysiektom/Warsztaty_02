@@ -69,7 +69,7 @@ public class Solution {
     public void saveToDB(Connection conn) throws SQLException {
         if (this.id == 0) {
             String sql = "INSERT INTO solution(created, updated, description, exercise_id, user_id) VALUES (?, ?, ?, ?, ?)";
-            String[] generatedColumns = { "ID" };
+            String[] generatedColumns = {"ID"};
             PreparedStatement preparedStatement = conn.prepareStatement(sql, generatedColumns);
             preparedStatement.setTimestamp(1, this.created);
             preparedStatement.setTimestamp(2, this.updated);
@@ -105,9 +105,10 @@ public class Solution {
             loadedSolution.created = resultSet.getTimestamp("created");
             loadedSolution.updated = resultSet.getTimestamp("updated");
             loadedSolution.description = resultSet.getString("description");
-            loadedSolution.exercise_id=resultSet.getInt("exercise_id");
-            loadedSolution.user_id=resultSet.getInt("user_id");
-            return loadedSolution;}
+            loadedSolution.exercise_id = resultSet.getInt("exercise_id");
+            loadedSolution.user_id = resultSet.getInt("user_id");
+            return loadedSolution;
+        }
         return null;
     }
 
@@ -122,10 +123,12 @@ public class Solution {
             loadedSolution.created = resultSet.getTimestamp("created");
             loadedSolution.updated = resultSet.getTimestamp("updated");
             loadedSolution.description = resultSet.getString("description");
-            loadedSolution.exercise_id=resultSet.getInt("exercise_id");
-            loadedSolution.user_id=resultSet.getInt("user_id");
-            solution.add(loadedSolution);}
-        Solution[] uArray = new Solution[solution.size()]; uArray = solution.toArray(uArray);
+            loadedSolution.exercise_id = resultSet.getInt("exercise_id");
+            loadedSolution.user_id = resultSet.getInt("user_id");
+            solution.add(loadedSolution);
+        }
+        Solution[] uArray = new Solution[solution.size()];
+        uArray = solution.toArray(uArray);
         return uArray;
     }
 
@@ -151,10 +154,12 @@ public class Solution {
             loadedSolution.created = resultSet.getTimestamp("created");
             loadedSolution.updated = resultSet.getTimestamp("updated");
             loadedSolution.description = resultSet.getString("description");
-            loadedSolution.exercise_id=resultSet.getInt("exercise_id");
-            loadedSolution.user_id=resultSet.getInt("user_id");
-            solution.add(loadedSolution);}
-        Solution[] uArray = new Solution[solution.size()]; uArray = solution.toArray(uArray);
+            loadedSolution.exercise_id = resultSet.getInt("exercise_id");
+            loadedSolution.user_id = resultSet.getInt("user_id");
+            solution.add(loadedSolution);
+        }
+        Solution[] uArray = new Solution[solution.size()];
+        uArray = solution.toArray(uArray);
         return uArray;
     }
 
@@ -170,10 +175,12 @@ public class Solution {
             loadedSolution.created = resultSet.getTimestamp("created");
             loadedSolution.updated = resultSet.getTimestamp("updated");
             loadedSolution.description = resultSet.getString("description");
-            loadedSolution.exercise_id=resultSet.getInt("exercise_id");
-            loadedSolution.user_id=resultSet.getInt("users_id");
-            solution.add(loadedSolution);}
-        Solution[] uArray = new Solution[solution.size()]; uArray = solution.toArray(uArray);
+            loadedSolution.exercise_id = resultSet.getInt("exercise_id");
+            loadedSolution.user_id = resultSet.getInt("users_id");
+            solution.add(loadedSolution);
+        }
+        Solution[] uArray = new Solution[solution.size()];
+        uArray = solution.toArray(uArray);
         return uArray;
     }
 

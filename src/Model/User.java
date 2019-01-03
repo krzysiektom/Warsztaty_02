@@ -1,6 +1,7 @@
 package Model;
 
 import org.mindrot.jbcrypt.BCrypt;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,7 +13,7 @@ public class User {
     private String username;
     private String email;
     private String password;
-    private int  userGroup_id;
+    private int userGroup_id;
 
     public User(String username, String email, String password) {
         this.username = username;
@@ -73,7 +74,7 @@ public class User {
     public void saveToDB(Connection conn) throws SQLException {
         if (this.id == 0) {
             String sql = "INSERT INTO users(username, email, password, usergroup_id) VALUES (?, ?, ?, ?)";
-            String[] generatedColumns = { "ID" };
+            String[] generatedColumns = {"ID"};
             PreparedStatement preparedStatement = conn.prepareStatement(sql, generatedColumns);
             preparedStatement.setString(1, this.username);
             preparedStatement.setString(2, this.email);
@@ -107,8 +108,9 @@ public class User {
             loadedUser.username = resultSet.getString("username");
             loadedUser.password = resultSet.getString("password");
             loadedUser.email = resultSet.getString("email");
-            loadedUser.userGroup_id= resultSet.getInt("usergroup_id");
-            return loadedUser;}
+            loadedUser.userGroup_id = resultSet.getInt("usergroup_id");
+            return loadedUser;
+        }
         return null;
     }
 
@@ -123,9 +125,11 @@ public class User {
             loadedUser.username = resultSet.getString("username");
             loadedUser.password = resultSet.getString("password");
             loadedUser.email = resultSet.getString("email");
-            loadedUser.userGroup_id= resultSet.getInt("usergroup_id");
-            users.add(loadedUser);}
-        User[] uArray = new User[users.size()]; uArray = users.toArray(uArray);
+            loadedUser.userGroup_id = resultSet.getInt("usergroup_id");
+            users.add(loadedUser);
+        }
+        User[] uArray = new User[users.size()];
+        uArray = users.toArray(uArray);
         return uArray;
     }
 
@@ -150,9 +154,11 @@ public class User {
             loadedUser.username = resultSet.getString("username");
             loadedUser.password = resultSet.getString("password");
             loadedUser.email = resultSet.getString("email");
-            loadedUser.userGroup_id= resultSet.getInt("usergroup_id");
-            users.add(loadedUser);}
-        User[] uArray = new User[users.size()]; uArray = users.toArray(uArray);
+            loadedUser.userGroup_id = resultSet.getInt("usergroup_id");
+            users.add(loadedUser);
+        }
+        User[] uArray = new User[users.size()];
+        uArray = users.toArray(uArray);
         return uArray;
     }
 

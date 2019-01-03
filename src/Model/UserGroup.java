@@ -32,7 +32,7 @@ public class UserGroup {
     public void saveToDB(Connection conn) throws SQLException {
         if (this.id == 0) {
             String sql = "INSERT INTO userGroups(name) VALUES (?)";
-            String[] generatedColumns = { "ID" };
+            String[] generatedColumns = {"ID"};
             PreparedStatement preparedStatement = conn.prepareStatement(sql, generatedColumns);
             preparedStatement.setString(1, this.name);
             preparedStatement.executeUpdate();
@@ -59,7 +59,8 @@ public class UserGroup {
             UserGroup loadedUserGroup = new UserGroup();
             loadedUserGroup.id = resultSet.getInt("id");
             loadedUserGroup.name = resultSet.getString("name");
-            return loadedUserGroup;}
+            return loadedUserGroup;
+        }
         return null;
     }
 
@@ -72,8 +73,10 @@ public class UserGroup {
             UserGroup loadedUserGroup = new UserGroup();
             loadedUserGroup.id = resultSet.getInt("id");
             loadedUserGroup.name = resultSet.getString("name");
-            userGroups.add(loadedUserGroup);}
-        UserGroup[] uArray = new UserGroup[userGroups.size()]; uArray = userGroups.toArray(uArray);
+            userGroups.add(loadedUserGroup);
+        }
+        UserGroup[] uArray = new UserGroup[userGroups.size()];
+        uArray = userGroups.toArray(uArray);
         return uArray;
     }
 

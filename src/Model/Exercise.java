@@ -42,7 +42,7 @@ public class Exercise {
     public void saveToDB(Connection conn) throws SQLException {
         if (this.id == 0) {
             String sql = "INSERT INTO exercise(title, description) VALUES (?, ?)";
-            String[] generatedColumns = { "ID" };
+            String[] generatedColumns = {"ID"};
             PreparedStatement preparedStatement = conn.prepareStatement(sql, generatedColumns);
             preparedStatement.setString(1, this.title);
             preparedStatement.setString(2, this.description);
@@ -71,7 +71,8 @@ public class Exercise {
             loadedExercise.id = resultSet.getInt("id");
             loadedExercise.title = resultSet.getString("title");
             loadedExercise.description = resultSet.getString("description");
-            return loadedExercise;}
+            return loadedExercise;
+        }
         return null;
     }
 
@@ -86,8 +87,10 @@ public class Exercise {
             loadedExercise.id = resultSet.getInt("id");
             loadedExercise.title = resultSet.getString("title");
             loadedExercise.description = resultSet.getString("description");
-            exercise.add(loadedExercise);}
-        Exercise[] uArray = new Exercise[exercise.size()]; uArray = exercise.toArray(uArray);
+            exercise.add(loadedExercise);
+        }
+        Exercise[] uArray = new Exercise[exercise.size()];
+        uArray = exercise.toArray(uArray);
         return uArray;
     }
 
@@ -101,8 +104,10 @@ public class Exercise {
             loadedExercise.id = resultSet.getInt("id");
             loadedExercise.title = resultSet.getString("title");
             loadedExercise.description = resultSet.getString("description");
-            exercise.add(loadedExercise);}
-        Exercise[] uArray = new Exercise[exercise.size()]; uArray = exercise.toArray(uArray);
+            exercise.add(loadedExercise);
+        }
+        Exercise[] uArray = new Exercise[exercise.size()];
+        uArray = exercise.toArray(uArray);
         return uArray;
     }
 

@@ -68,7 +68,7 @@ public class Solution {
 
     public void saveToDB(Connection conn) throws SQLException {
         if (this.id == 0) {
-            String sql = "INSERT INTO solution(created, updated, description, exercise_id, user_id) VALUES (?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO solutions(created, updated, description, exercise_id, user_id) VALUES (?, ?, ?, ?, ?)";
             String[] generatedColumns = {"ID"};
             PreparedStatement preparedStatement = conn.prepareStatement(sql, generatedColumns);
             preparedStatement.setTimestamp(1, this.created);
@@ -82,7 +82,7 @@ public class Solution {
                 this.id = rs.getInt(1);
             }
         } else {
-            String sql = "update solution SET created=?, updated=?, description=? exercise_id=?, user_id=? where id = ?";
+            String sql = "update solutions SET created=?, updated=?, description=? exercise_id=?, user_id=? where id = ?";
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setTimestamp(1, this.created);
             preparedStatement.setTimestamp(2, this.updated);
@@ -95,7 +95,7 @@ public class Solution {
     }
 
     static public Solution loadSolutionById(Connection conn, int id) throws SQLException {
-        String sql = "SELECT * FROM solution where id=?";
+        String sql = "SELECT * FROM solutions where id=?";
         PreparedStatement preparedStatement = conn.prepareStatement(sql);
         preparedStatement.setInt(1, id);
         ResultSet resultSet = preparedStatement.executeQuery();
@@ -114,7 +114,7 @@ public class Solution {
 
     static public Solution[] loadAllsolution(Connection conn) throws SQLException {
         ArrayList<Solution> solution = new ArrayList<Solution>();
-        String sql = "SELECT * FROM solution";
+        String sql = "SELECT * FROM solutions";
         PreparedStatement preparedStatement = conn.prepareStatement(sql);
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {

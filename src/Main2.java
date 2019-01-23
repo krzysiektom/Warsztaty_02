@@ -1,5 +1,4 @@
 import Model.Exercise;
-import Model.User;
 
 import java.sql.SQLException;
 import java.util.Scanner;
@@ -27,9 +26,8 @@ public class Main2 {
                     break;
                 }
                 case "edit": {
-                    Exercise exercise = new Exercise();
                     System.out.println("Wprowadz id edytowanego zadania");
-                    exercise = Exercise.loadExerciseById(DatabaseConnection.getEfficientConnection(), Integer.valueOf(scan.nextLine()));
+                    Exercise exercise = Exercise.loadExerciseById(DatabaseConnection.getEfficientConnection(), Integer.valueOf(scan.nextLine()));
                     System.out.println("Wprowadz tytuł edytowanego zadania");
                     exercise.setTitle(scan.nextLine());
                     System.out.println("Wprowadz opis edytowanego zadania");
@@ -40,9 +38,8 @@ public class Main2 {
                     break;
                 }
                 case "delete": {
-                    Exercise exercise = new Exercise();
                     System.out.println("Wprowadz id usuwanego zadania");
-                    exercise = Exercise.loadExerciseById(DatabaseConnection.getEfficientConnection(), Integer.valueOf(scan.nextLine()));
+                    Exercise exercise = Exercise.loadExerciseById(DatabaseConnection.getEfficientConnection(), Integer.valueOf(scan.nextLine()));
                     exercise.delete(DatabaseConnection.getEfficientConnection());
                     viewAllExercises();
                     viewMenu();

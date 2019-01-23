@@ -41,7 +41,7 @@ public class Exercise {
 
     public void saveToDB(Connection conn) throws SQLException {
         if (this.id == 0) {
-            String sql = "INSERT INTO exercise(title, description) VALUES (?, ?)";
+            String sql = "INSERT INTO exercises(title, description) VALUES (?, ?)";
             String[] generatedColumns = {"ID"};
             PreparedStatement preparedStatement = conn.prepareStatement(sql, generatedColumns);
             preparedStatement.setString(1, this.title);
@@ -52,7 +52,7 @@ public class Exercise {
                 this.id = rs.getInt(1);
             }
         } else {
-            String sql = "UPDATE exercise SET title=?, description=? where id = ?";
+            String sql = "UPDATE exercises SET title=?, description=? where id = ?";
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, this.title);
             preparedStatement.setString(2, this.description);
@@ -62,7 +62,7 @@ public class Exercise {
     }
 
     static public Exercise loadExerciseById(Connection conn, int id) throws SQLException {
-        String sql = "SELECT * FROM exercise where id=?";
+        String sql = "SELECT * FROM exercises where id=?";
         PreparedStatement preparedStatement = conn.prepareStatement(sql);
         preparedStatement.setInt(1, id);
         ResultSet resultSet = preparedStatement.executeQuery();
@@ -78,7 +78,7 @@ public class Exercise {
 
     static public Exercise[] loadExerciseNotSolvedByUserId(Connection conn, int user_id) throws SQLException {
         ArrayList<Exercise> exercise = new ArrayList<Exercise>();
-        String sql = "SELECT * from exercise where id not in ((select exercise_id from solution where user_id=?))";
+        String sql = "SELECT * from exercises where id not in ((select exercise_id from solutions where user_id=?))";
         PreparedStatement preparedStatement = conn.prepareStatement(sql);
         preparedStatement.setInt(1, user_id);
         ResultSet resultSet = preparedStatement.executeQuery();

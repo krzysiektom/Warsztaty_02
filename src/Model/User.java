@@ -143,10 +143,11 @@ public class User {
         }
     }
 
-    static public User[] loadAllByGroupId(Connection conn) throws SQLException {
+    static public User[] loadAllByGroupId(Connection conn,int userGroup_id) throws SQLException {
         ArrayList<User> users = new ArrayList<User>();
-        String sql = "SELECT * FROM users WHERE ";
+        String sql = "SELECT * FROM users WHERE userGroup_id = ?";
         PreparedStatement preparedStatement = conn.prepareStatement(sql);
+        preparedStatement.setLong(1, userGroup_id);
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
             User loadedUser = new User();
